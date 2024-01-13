@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>es.ieslosmontecillos</groupId>
-    <artifactId>ComponentesAppHotel</artifactId>
+    <artifactId>Componentes_AppHotel</artifactId>
     <version>1.0</version>
     <name>ComponentesAppHotel</name>
     <description>Componentes para la app Hotel Delta</description>
@@ -14,9 +14,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <junit.version>5.10.0</junit.version>
+        <junit.version>5.9.2</junit.version>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>

@@ -56,7 +56,7 @@ public class Temporizador extends Label {
 
     public void iniciarCronometro() {
         tiempoProperty.set(getTiempo());
-        textProperty().bind(tiempoProperty.asString("Tiempo: %d"));
+        textProperty().bind(tiempoProperty.asString("Tiempo restante: %d"));
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), event -> {
             tiempoProperty.set(tiempoProperty.get() - 1);
             if (tiempoProperty.get() <= 0) {
