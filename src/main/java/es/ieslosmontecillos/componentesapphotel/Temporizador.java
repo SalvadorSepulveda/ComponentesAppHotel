@@ -3,6 +3,7 @@ package es.ieslosmontecillos.componentesapphotel;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,6 +16,7 @@ import java.io.IOException;
 
 public class Temporizador extends Label {
     private SimpleIntegerProperty tiempoProperty = new SimpleIntegerProperty();
+    private SimpleBooleanProperty terminadoProperty = new SimpleBooleanProperty();
     private Timeline timeline;
 
     public Temporizador() {
@@ -28,7 +30,8 @@ public class Temporizador extends Label {
         }
         timeline = new Timeline();
         timeline.setOnFinished(event -> {
-            System.out.println("Temporizador terminado");
+            setTerminadoProperty(true);
+            // Arreglar para que entre aquí
         });
     }
 
@@ -45,8 +48,20 @@ public class Temporizador extends Label {
         return tiempoProperty;
     }
 
+    public boolean getTerminado() {
+        return terminadoProperty.get();
+    }
+
+    public SimpleBooleanProperty terminadoProperty() {
+        return terminadoProperty;
+    }
+
+    public void setTerminadoProperty(boolean terminadoProperty) {
+        this.terminadoProperty.set(terminadoProperty);
+    }
+
     private void actualizarEtiqueta() {
-        setText("Tiempo: " + tiempoProperty.get());
+        setText("Tiempo restante: " + tiempoProperty.get() + "s");
     }
 
     @FXML
@@ -56,12 +71,13 @@ public class Temporizador extends Label {
 
     public void iniciarCronometro() {
         tiempoProperty.set(getTiempo());
-        textProperty().bind(tiempoProperty.asString("Tiempo restante: %d"));
+        terminadoProperty.set(false);
+        textProperty().bind(tiempoProperty.asString("Tiempo restante: %ds"));
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), event -> {
             tiempoProperty.set(tiempoProperty.get() - 1);
             if (tiempoProperty.get() <= 0) {
                 timeline.stop();
-                System.out.println("Temporizador terminado");
+                setTerminadoProperty(true);
             }
         });
         timeline.getKeyFrames().setAll(keyFrame);
