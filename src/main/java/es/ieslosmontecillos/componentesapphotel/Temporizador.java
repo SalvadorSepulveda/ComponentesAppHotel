@@ -29,10 +29,10 @@ public class Temporizador extends Label {
             throw new RuntimeException(exception);
         }
         timeline = new Timeline();
-        timeline.setOnFinished(event -> {
+        /*timeline.setOnFinished(event -> {
             setTerminadoProperty(true);
-            // Arreglar para que entre aquí
-        });
+
+        });*/
     }
 
     public int getTiempo() {
@@ -76,7 +76,7 @@ public class Temporizador extends Label {
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), event -> {
             tiempoProperty.set(tiempoProperty.get() - 1);
             if (tiempoProperty.get() <= 0) {
-                timeline.stop();
+                //timeline.stop();
                 setTerminadoProperty(true);
             }
         });
